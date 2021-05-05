@@ -1,7 +1,7 @@
 # isucon10
 
-##導入
-###インストールもと  
+##導入  
+#インストールもと  
 `git clone https://github.com/matsuu/vagrant-isucon`
 
 ###Vargantfileの内容変更(クローンもとをiwashiさんのリポジトリに変える)  
