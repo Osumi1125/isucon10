@@ -9,3 +9,8 @@
 
 Vargantファイルのあるディレクトリで  
 `vagrant up`
+
+ベンチマークの実行
+`sudo -i -u isucon
+cd isuumo/bench
+./bench -target-url http://127.0.0.1`
