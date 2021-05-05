@@ -31,6 +31,7 @@ cd isucon_secret_sauce
 
 ## 計測ツールUSAGE
 ### alp
+アクセスログの解析
 nginxの再起動(設定変更はツール導入時に終わっている)
 ```
 isucon@ubuntu-bionic:~$ sudo systemctl reload nginx
@@ -42,24 +43,54 @@ sudo alp --sum -r -f /var/log/nginx/access.log --aggregates='/api/estate/[0-9]+'
 ```
 
 ### pt-query-digest
-mysqlの再起動(設定変更はツール導入時に終わっている)
+mysql設定変更
 ```
-isucon@ubuntu-bionic:~$ sudo service mysql reload
- * Reloading MySQL database server mysqld                                                                 [ OK ]
-isucon@ubuntu-bionic:~$ sudo systemctl reload mysqld
-Failed to reload mysqld.service: Unit mysqld.service not found.
-isucon@ubuntu-bionic:~$
-isucon@ubuntu-bionic:~$
-isucon@ubuntu-bionic:~$
-isucon@ubuntu-bionic:~$ sudo service mysql status
-● mysql.service - MySQL Community Server
-   Loaded: loaded (/lib/systemd/system/mysql.service; enabled; vendor preset: enabled)
-   Active: active (running) since Wed 2021-05-05 06:25:15 UTC; 2h 24min ago
- Main PID: 1183 (mysqld)
-    Tasks: 37 (limit: 2361)
-   CGroup: /system.slice/mysql.service
-           └─1183 /usr/sbin/mysqld --daemonize --pid-file=/run/mysqld/mysqld.pid
+isucon@ubuntu-bionic:~/isuumo/bench$ sudo vi  /etc/mysql/mysql.conf.d/mysqld.cnf
+```
+以下のチェックを外してスローログ取得を有効化する
+```
+# Here you can see queries with especially long duration
+slow_query_log         = 1
+slow_query_log_file    = /var/log/mysql/mysql-slow.log
+long_query_time = 0
+```
 
-May 05 06:25:12 ubuntu-bionic systemd[1]: Starting MySQL Community Server...
-May 05 06:25:15 ubuntu-bionic systemd[1]: Started MySQL Community Server.
+mysqlの再起動
+```
+isucon@ubuntu-bionic:~/isuumo/bench$ sudo service mysql restart
+```
+
+
+mysqlログイン&スローログ設定確認
+```
+isucon@ubuntu-bionic:~/isuumo/bench$ sudo mysql -u isucon -p
+Enter password:isucon
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 2416
+Server version: 5.7.33-0ubuntu0.18.04.1 (Ubuntu)
+
+Copyright (c) 2000, 2021, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show variables like 'slow%';
++---------------------+-------------------------------+
+| Variable_name       | Value                         |
++---------------------+-------------------------------+
+| slow_launch_time    | 2                             |
+| slow_query_log      | ON                            |
+| slow_query_log_file | /var/log/mysql/mysql-slow.log |
++---------------------+-------------------------------+
+3 rows in set (0.00 sec)
+```
+
+
+## netdata
+ブラウザでサーバリソース使用量のリアルタイム表示
+```
+http://172.28.128.3:19999/
 ```
