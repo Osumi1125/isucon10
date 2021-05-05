@@ -94,3 +94,5 @@ mysql> show variables like 'slow%';
 ```
 http://172.28.128.3:19999/
 ```
+スクリーンショット 2021-05-05 19.17.59![image](https://user-images.githubusercontent.com/82875507/117127157-b36ffe80-add6-11eb-97d2-b0ad4273ff4b.png)
+
