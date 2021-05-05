@@ -31,7 +31,35 @@ cd isucon_secret_sauce
 
 ## USAGE
 ### alp
+nginxの再起動
+```
+isucon@ubuntu-bionic:~$ sudo systemctl reload nginx
+```
+
 同じハンドラでまとめて集計
 ```
 sudo alp --sum -r -f /var/log/nginx/access.log --aggregates='/api/estate/[0-9]+','/api/estate/req_doc/[0-9]+','/api/chair/[0-9]+','/api/chair/buy/*','/api/recommended_estate/[0-9]+'
+```
+
+### pt-query-digest
+mysqlの再起動
+```
+isucon@ubuntu-bionic:~$ sudo service mysql reload
+ * Reloading MySQL database server mysqld                                                                 [ OK ]
+isucon@ubuntu-bionic:~$ sudo systemctl reload mysqld
+Failed to reload mysqld.service: Unit mysqld.service not found.
+isucon@ubuntu-bionic:~$
+isucon@ubuntu-bionic:~$
+isucon@ubuntu-bionic:~$
+isucon@ubuntu-bionic:~$ sudo service mysql status
+● mysql.service - MySQL Community Server
+   Loaded: loaded (/lib/systemd/system/mysql.service; enabled; vendor preset: enabled)
+   Active: active (running) since Wed 2021-05-05 06:25:15 UTC; 2h 24min ago
+ Main PID: 1183 (mysqld)
+    Tasks: 37 (limit: 2361)
+   CGroup: /system.slice/mysql.service
+           └─1183 /usr/sbin/mysqld --daemonize --pid-file=/run/mysqld/mysqld.pid
+
+May 05 06:25:12 ubuntu-bionic systemd[1]: Starting MySQL Community Server...
+May 05 06:25:15 ubuntu-bionic systemd[1]: Started MySQL Community Server.
 ```
