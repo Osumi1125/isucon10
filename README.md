@@ -31,7 +31,7 @@ cd isucon_secret_sauce
 
 ## USAGE
 ### alp
-nginxの再起動
+nginxの再起動(設定変更はツール導入時に終わっている)
 ```
 isucon@ubuntu-bionic:~$ sudo systemctl reload nginx
 ```
@@ -42,7 +42,7 @@ sudo alp --sum -r -f /var/log/nginx/access.log --aggregates='/api/estate/[0-9]+'
 ```
 
 ### pt-query-digest
-mysqlの再起動
+mysqlの再起動(設定変更はツール導入時に終わっている)
 ```
 isucon@ubuntu-bionic:~$ sudo service mysql reload
  * Reloading MySQL database server mysqld                                                                 [ OK ]
