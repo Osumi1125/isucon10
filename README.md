@@ -29,7 +29,7 @@ cd isucon_secret_sauce
 ```
 
 
-## USAGE
+## 計測ツールUSAGE
 ### alp
 nginxの再起動(設定変更はツール導入時に終わっている)
 ```
