@@ -31,7 +31,7 @@ cd isucon_secret_sauce
 
 ## 計測ツールUSAGE
 ### alp
-アクセスログの解析
+アクセスログの解析  
 nginxの再起動(設定変更はツール導入時に終わっている)
 ```
 isucon@ubuntu-bionic:~$ sudo systemctl reload nginx
