@@ -17,3 +17,12 @@ Vargantfileのあるディレクトリで
 cd isuumo/bench  
 ./bench -target-url http://127.0.0.1
 ```
+
+計測ツールの導入
+```
+cd 	isucon_secret_source
+chmod -R +x  ./isucon_secret_sauce/
+cd isucon_secret_sauce
+
+./setup.sh
+```
